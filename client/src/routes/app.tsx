@@ -24,7 +24,14 @@ export const App = () => {
         onAddInsight={(insight) =>
           setInsights((current) => [...current, insight])}
       />
-      <Insights className={styles.insights} insights={insights} />
+      <Insights
+        className={styles.insights}
+        insights={insights}
+        onDelete={(id) =>
+          setInsights((current) =>
+            current.filter((insight) => insight.id !== id)
+          )}
+      />
     </main>
   );
 };
