@@ -3,6 +3,12 @@ import { cx } from "../../lib/cx.ts";
 import styles from "./insights.module.css";
 import type { Insight } from "../../schemas/insight.ts";
 
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat(undefined, {
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(date);
+
 type InsightsProps = {
   insights: Insight[];
   className?: string;
@@ -29,9 +35,9 @@ export const Insights = ({ insights, className, onDelete }: InsightsProps) => {
             insights.map(({ id, text, createdAt, brand }) => (
               <div className={styles.insight} key={id}>
                 <div className={styles["insight-meta"]}>
-                  <span>{brand}</span>
+                  <span>Brand {brand}</span>
                   <div className={styles["insight-meta-details"]}>
-                    <span>{createdAt.toString()}</span>
+                    <span>{formatDate(createdAt)}</span>
                     <Trash2Icon
                       className={styles["insight-delete"]}
                       aria-label={`Delete insight ${id}`}
